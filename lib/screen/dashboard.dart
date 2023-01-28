@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ngicon_task/model/model_class.dart';
+import 'package:ngicon_task/screen/details_page.dart';
 import 'package:ngicon_task/utls/const.dart';
+
+import '../utls/const.dart';
 
 class DashBoardScreen extends StatefulWidget {
   const DashBoardScreen({super.key});
@@ -17,11 +20,15 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text('DashBoard'),
+      ),
       body: ListView(
         shrinkWrap: true,
         // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          TextField(
+          /* TextField(
             keyboardType: TextInputType.number,
             controller: controller,
           ),
@@ -47,7 +54,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                 snackBar;
                 setState(() {});
               },
-              child: Text('Submmit')),
+              child: Text('Submmit')), */
           sboxH16,
           Padding(
               padding: const EdgeInsets.only(left: 16),
@@ -83,8 +90,6 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                 // scrollDirection: Axis.vertical,
                 shrinkWrap: true,
                 itemBuilder: (context, index) => CustomCard(
-                  count: count,
-                  total: total,
                   modelClass: modelClass[index],
                 ),
                 itemCount: modelClass.length,
@@ -145,11 +150,9 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
 class CustomCard extends StatefulWidget {
   const CustomCard({
     Key? key,
-    required this.count,
-    required this.total,
     required this.modelClass,
   }) : super(key: key);
-  final int count, total;
+
   final ModelClass modelClass;
 
   @override
@@ -160,106 +163,120 @@ class _CustomCardState extends State<CustomCard> {
   final count = CountModel.count;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 150,
-      decoration: BoxDecoration(border: Border.all()),
-      padding: all16,
-      child: Row(
-        // mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Icon(widget.count == widget.modelClass.toalTask
-              ? Icons.check_box_outlined
-              : Icons.check_box_outline_blank_outlined),
-          sboxW8,
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    heaingText(widget.modelClass.projectName,
-                        fontSize: 14, fontWeight: FontWeight.w600),
-                    Container(
-                      constraints: BoxConstraints(maxWidth: 150),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.green.shade100),
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                      child: heaingText(widget.modelClass.status,
-                          fontSize: 14,
-                          color: Colors.deepPurple,
-                          fontWeight: FontWeight.w500),
-                    )
-                  ],
-                ),
-                heaingText(widget.modelClass.taskName,
-                    fontSize: 14, fontWeight: FontWeight.w600),
-                sboxH8,
-                Row(
-                  children: [
-                    Expanded(
-                      child: Stack(
-                        children: [
-                          Container(
-                            height: 12,
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Color(0xff363748)),
-                            // color: Colors.red,
-                          ),
-                          LayoutBuilder(
-                            builder: (context, BoxConstraints) => Container(
-                              width: BoxConstraints.maxWidth *
-                                  count.count /
-                                  widget.modelClass.toalTask,
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => DetailsScreen(),
+            ));
+      },
+      child: Container(
+        // height: 150,
+        decoration: BoxDecoration(
+          border: Border.all(),
+          borderRadius: BorderRadius.circular(16),
+          color: kMain2,
+        ),
+        padding: all16,
+        child: Row(
+          // mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(widget.modelClass.taskdDone == widget.modelClass.toalTask
+                ? Icons.check_box_outlined
+                : Icons.check_box_outline_blank_outlined),
+            sboxW8,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      heaingText(widget.modelClass.projectName,
+                          fontSize: 14, fontWeight: FontWeight.w600),
+                      Container(
+                        constraints: BoxConstraints(maxWidth: 150),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.green.shade100),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        child: heaingText(widget.modelClass.status,
+                            fontSize: 14,
+                            color: Colors.deepPurple,
+                            fontWeight: FontWeight.w500),
+                      )
+                    ],
+                  ),
+                  heaingText(widget.modelClass.taskName,
+                      fontSize: 14, fontWeight: FontWeight.w600),
+                  sboxH8,
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Stack(
+                          children: [
+                            Container(
                               height: 12,
+                              width: double.infinity,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Color(0xff9C67F9),
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Color(0xff363748)),
+                              // color: Colors.red,
+                            ),
+                            LayoutBuilder(
+                              builder: (context, BoxConstraints) => Container(
+                                width: BoxConstraints.maxWidth *
+                                    widget.modelClass.taskdDone /
+                                    widget.modelClass.toalTask,
+                                height: 12,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Color(0xff9C67F9),
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                    Container(
-                        width: 60,
-                        child: Center(
-                            child: Text(
-                                '${count.count}/${widget.modelClass.toalTask}')))
-                  ],
-                ),
-                Row(
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          count.count > 0 ? count.count-- : null;
-                        });
-                      },
-                      child: Icon(Icons.remove),
-                    ),
-                    sboxW16,
-                    ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          count.count < widget.modelClass.toalTask
-                              ? count.count++
-                              : null;
-                        });
-                      },
-                      child: Icon(Icons.add),
-                    ),
-                  ],
-                ),
-              ],
+                      Container(
+                          width: 60,
+                          child: Center(
+                              child: Text(
+                                  '${widget.modelClass.taskdDone}/${widget.modelClass.toalTask}')))
+                    ],
+                  ),
+                  /* Row(
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            count.count > 0 ? count.count-- : null;
+                          });
+                        },
+                        child: Icon(Icons.remove),
+                      ),
+                      sboxW16,
+                      ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            widget.modelClass.taskdDone <
+                                    widget.modelClass.toalTask
+                                ? widget.modelClass.taskdDone++
+                                : null;
+                          });
+                        },
+                        child: Icon(Icons.add),
+                      ),
+                    ],
+                  ), */
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
