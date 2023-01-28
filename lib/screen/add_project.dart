@@ -62,6 +62,7 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
               hints: 'task details',
               title: 'Details',
               maxLine: 3,
+              maxLength: 30,
             ),
             sboxH8,
             // sboxH16,

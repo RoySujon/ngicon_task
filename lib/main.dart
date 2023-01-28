@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
         checkboxTheme: CheckboxThemeData(
             fillColor: MaterialStateProperty.all(ksystemGrey)),
       ),
-      home: AddProjectScreen(),
+      home: DetailsScreen(),
     );
   }
 }

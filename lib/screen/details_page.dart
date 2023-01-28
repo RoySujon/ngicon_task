@@ -203,8 +203,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                           showDialog(
                                             context: context,
                                             builder: (context) => AlertDialog(
-                                                title: Text('Comment'),
+                                                backgroundColor: kMain2,
+                                                title: heaingText('Comment',
+                                                    color: kLabel),
                                                 content: TextField(
+                                                  maxLines: 4,
+                                                  maxLength: 300,
                                                   style:
                                                       TextStyle(color: kLabel),
                                                   decoration: InputDecoration(
@@ -213,7 +217,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                               borderSide:
                                                                   BorderSide(
                                                                       color:
-                                                                          kMain))),
+                                                                          kLabel))),
                                                 ),
                                                 actions: [
                                                   ElevatedButton(
