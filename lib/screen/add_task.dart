@@ -333,12 +333,70 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                     child: heaingText('Next')),
               ],
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: List.generate(
+                  taskType.length,
+                  (index) => InkWell(
+                        onTap: () {
+                          select = index;
+                          setState(() {});
+                        },
+                        child: Padding(
+                          padding: all16,
+                          child: Container(
+                            color: kMain2,
+                            padding: all16,
+                            child: heaingText('${taskType[index]}',
+                                color: index == select
+                                    ? Colors.red
+                                    : Colors.green),
+                          ),
+                        ),
+                      )),
+            ),
+            taskTypeScreen[select],
           ],
         ),
       ),
     );
   }
+
+  int select = 0;
 }
+
+List<String> taskType = [
+  'OneTime',
+  'Daily',
+  'Weekly',
+  'Monthly',
+];
+List<Container> taskTypeScreen = [
+  Container(
+    height: 200,
+    child: ListView(
+      children: List.generate(50, (index) => Text('OneTime')),
+    ),
+  ),
+  Container(
+    height: 200,
+    child: ListView(
+      children: List.generate(50, (index) => Text('Daily')),
+    ),
+  ),
+  Container(
+    height: 200,
+    child: ListView(
+      children: List.generate(50, (index) => Text('Weekly')),
+    ),
+  ),
+  Container(
+    height: 200,
+    child: ListView(
+      children: List.generate(50, (index) => Text('Monthly')),
+    ),
+  ),
+];
 
 class CustomDropDownMenue extends StatefulWidget {
   late String value;
