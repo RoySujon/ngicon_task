@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ngicon_task/screen/add_project.dart';
 import 'package:ngicon_task/screen/dashboard.dart';
 import 'package:ngicon_task/utls/const.dart';
 
@@ -63,7 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ElevatedButton(
             onPressed: () {
               Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (context) => DashBoardScreen(),
+                builder: (context) => AddProjectScreen(),
               ));
             },
             child: Text('Login'),

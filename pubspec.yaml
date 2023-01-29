@@ -39,6 +39,7 @@ dependencies:
   
   readmore: ^2.2.0
   jiffy: 
+  flutter_ringtone_player:
   # intl: ^0.18.0
 
 dev_dependencies:

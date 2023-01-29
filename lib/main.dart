@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+// import 'package:google_fonts/google_fonts.dart';
 import 'package:ngicon_task/screen/add_project.dart';
-import 'package:ngicon_task/screen/details_page.dart';
-
+import 'package:ngicon_task/screen/add_task.dart';
+import 'package:ngicon_task/screen/counter_screen.dart';
 import 'package:ngicon_task/screen/login_form.dart';
+import 'package:ngicon_task/screen/task_allocations.dart';
+import 'package:ngicon_task/screen/timer.dart';
+// import 'package:ngicon_task/screen/details_page.dart';
+
+// import 'package:ngicon_task/screen/login_form.dart';
 import 'package:ngicon_task/utls/const.dart';
 
 void main() {
@@ -47,7 +52,7 @@ class MyApp extends StatelessWidget {
         checkboxTheme: CheckboxThemeData(
             fillColor: MaterialStateProperty.all(ksystemGrey)),
       ),
-      home: DetailsScreen(),
+      home: LoginScreen(),
     );
   }
 }

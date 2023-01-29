@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:ngicon_task/model/model_class.dart';
 import 'package:readmore/readmore.dart';
 
 import '../utls/const.dart';
@@ -16,8 +14,6 @@ class DetailsScreen extends StatefulWidget {
 }
 
 class _DetailsScreenState extends State<DetailsScreen> {
-  int? ml2 = 2;
-  TextOverflow? of2 = TextOverflow.ellipsis;
   bool readMore = false;
   @override
   Widget build(BuildContext context) {

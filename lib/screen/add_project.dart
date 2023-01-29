@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:ngicon_task/utls/const.dart';
 import 'package:jiffy/jiffy.dart';
 
+import '../model/add_task_class.dart';
+import '../utls/custom_text_field.dart';
+import 'add_task.dart';
+
 class AddProjectScreen extends StatefulWidget {
   const AddProjectScreen({super.key});
 
@@ -38,8 +42,8 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
     }
   }
 
-  final taskNameController = TextEditingController();
-  final detailsController = TextEditingController();
+  final projectNameController = TextEditingController();
+  final descriptionController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,15 +55,15 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
         child: Column(
           children: [
             CustomTextField(
-              controller: taskNameController, title: 'task Name',
-              hints: 'task Name',
+              controller: projectNameController, title: 'task Name',
+              hints: 'project Name',
               // maxLine: 4,
               // maxLength: 200,
             ),
             sboxH8,
             CustomTextField(
-              controller: detailsController,
-              hints: 'task details',
+              controller: descriptionController,
+              hints: 'project description',
               title: 'Details',
               maxLine: 3,
               maxLength: 30,
@@ -93,9 +97,9 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
                             endTime();
                           },
                           icon: Icon(Icons.watch_later_outlined)),
-                      Text(_startTime == null
+                      Text(_endtTime == null
                           ? TimeOfDay.now().format(context)
-                          : _startTime!.format(context)),
+                          : _endtTime!.format(context)),
                     ],
                   ),
                 ),
@@ -145,6 +149,27 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
                 ),
               ],
             ),
+            sboxH16,
+            Spacer(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                    onPressed: () {
+                      // Navigator.pop(context);
+                    },
+                    child: heaingText('Back')),
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AddTaskScreen(),
+                          ));
+                    },
+                    child: heaingText('Next')),
+              ],
+            ),
           ],
         ),
       ),
@@ -152,57 +177,4 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
   }
 
   String dropdownValue = managerList.first;
-}
-
-final List<String> managerList = [
-  for (int i = 0; i < 5; i++) 'Manager  ' + (i + 1).toString()
-];
-
-class CustomTextField extends StatelessWidget {
-  final String? hints, title;
-  final int? maxLine, maxLength;
-  final TextEditingController controller;
-  const CustomTextField({
-    super.key,
-    this.hints,
-    this.title,
-    this.maxLine,
-    required this.controller,
-    this.maxLength,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      // mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          width: 100,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              heaingText('${title ?? 'Title'}', fontSize: 18),
-              Text(':'),
-            ],
-          ),
-        ),
-        sboxW8,
-        Expanded(
-          child: TextField(
-            controller: controller,
-            maxLines: maxLine,
-            minLines: maxLine,
-            maxLength: maxLength,
-            decoration: InputDecoration(
-                // alignLabelWithHint: true,
-                hintText: 'Enter ${hints ?? 'hints..'}',
-                hintStyle: TextStyle(color: kLabel, fontSize: 14),
-                filled: true,
-                fillColor: kMain2),
-          ),
-        ),
-      ],
-    );
-  }
 }
