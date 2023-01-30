@@ -103,12 +103,20 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print(dropdownValue);
+    List<Widget> listOfwid = [
+      customCheckbox(day: 'Saturday', val: saturday),
+      customCheckbox(day: 'Sunday', val: sunday),
+      customCheckbox(day: 'Monday', val: moneday),
+      customCheckbox(day: 'Tuesday', val: tuesday),
+      customCheckbox(day: 'Wednessday', val: wednessday),
+      customCheckbox(day: 'Thursday', val: thursday),
+    ];
+    // print(dropdownValue);
     return Scaffold(
       appBar: AppBar(title: Text('Add Task')),
       body: Padding(
         padding: const EdgeInsets.all(16),
-        child: ListView(
+        child: Column(
           children: [
             Row(
               children: [
@@ -170,97 +178,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
             ),
             sboxH16,
             // sboxH16,
-            Row(
-              crossAxisAlignment: startDate != null
-                  ? CrossAxisAlignment.center
-                  : CrossAxisAlignment.end,
-              children: [
-                SizedBox(
-                  width: 100,
-                  child: ElevatedButton(
-                    onPressed: () => _startDate(context),
-                    child: Text('Start Date'),
-                  ),
-                ),
-                SizedBox(width: 16),
-                startDate == null
-                    ? Expanded(
-                        child: Container(
-                          height: 1,
-                          // width: double.infinity,
-                          color: kMain2,
-                        ),
-                      )
-                    : heaingText(
-                        Jiffy(startDate).format("do MMM yyyy"),
-                        color: kLabel,
-                      ),
-              ],
-            ),
-            sboxH16,
-            Row(
-              crossAxisAlignment: endDate != null
-                  ? CrossAxisAlignment.center
-                  : CrossAxisAlignment.end,
-              children: [
-                SizedBox(
-                  width: 100,
-                  child: ElevatedButton(
-                    onPressed: () => _endDate(context),
-                    child: Text('Deadline'),
-                  ),
-                ),
-                SizedBox(width: 16),
-                endDate == null
-                    ? Expanded(
-                        child: Container(
-                          height: 1,
-                          // width: double.infinity,
-                          color: kMain2,
-                        ),
-                      )
-                    : heaingText(
-                        Jiffy(endDate).format("do MMM yyyy"),
-                        color: kLabel,
-                      ),
-              ],
-            ),
-            Row(
-              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Row(
-                    children: [
-                      heaingText('Start:', fontSize: 18),
-                      IconButton(
-                          onPressed: () {
-                            startTime();
-                          },
-                          icon: Icon(Icons.watch_later_outlined)),
-                      Text(_startTime == null
-                          ? TimeOfDay.now().format(context)
-                          : _startTime!.format(context)),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: Row(
-                    children: [
-                      heaingText('End:', fontSize: 18),
-                      IconButton(
-                          onPressed: () {
-                            endTime();
-                            // print(_endtTime?.period);
-                          },
-                          icon: Icon(Icons.watch_later_outlined)),
-                      Text(_endtTime == null
-                          ? TimeOfDay.now().format(context)
-                          : _endtTime!.format(context)),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+
             sboxH16,
             Row(
               children: [
@@ -315,6 +233,157 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
             sboxH16,
             // Spacer(),
             Row(
+              // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Expanded(
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor:
+                              selected == 0 ? Colors.deepPurple : kMain2),
+                      onPressed: () {
+                        selected = 0;
+                        setState(() {});
+                      },
+                      child: Text('Daily')),
+                ),
+                sboxW16,
+                Expanded(
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor:
+                              selected == 1 ? Colors.deepPurple : kMain2),
+                      onPressed: () {
+                        selected = 1;
+                        setState(() {});
+                      },
+                      child: Text('WeekLy')),
+                ),
+                sboxW16,
+                Expanded(
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor:
+                              selected == 2 ? Colors.deepPurple : kMain2),
+                      onPressed: () {
+                        selected = 2;
+                        setState(() {});
+                      },
+                      child: Text('Monthly')),
+                ),
+              ],
+            ),
+            selected == 0
+                ? Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        sboxH16,
+                        ListTile(
+                          trailing: Text('Start Time'),
+                          tileColor: kMain2,
+                          onTap: () {
+                            startTime();
+                          },
+                          contentPadding: all16,
+                          title: Text(_startTime == null
+                              ? TimeOfDay.now().format(context)
+                              : _startTime!.format(context)),
+                          leading: Icon(
+                            Icons.watch_later_outlined,
+                            color: kLabel,
+                          ),
+                        ),
+                        sboxH16,
+                        ListTile(
+                          contentPadding: all16,
+                          trailing: Text('End Time'),
+                          tileColor: kMain2,
+                          onTap: () {
+                            endTime();
+                          },
+                          title: Text(_endtTime == null
+                              ? TimeOfDay.now().format(context)
+                              : _endtTime!.format(context)),
+                          leading: Icon(
+                            Icons.watch_later_outlined,
+                            color: kLabel,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                : selected == 1
+                    ? Expanded(
+                        child: ListView(
+                          children: listOfwid,
+                        ),
+                      )
+                    : Expanded(
+                        child: Column(
+                        // crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: startDate != null
+                                ? CrossAxisAlignment.center
+                                : CrossAxisAlignment.end,
+                            children: [
+                              SizedBox(
+                                width: 100,
+                                child: ElevatedButton(
+                                  onPressed: () => _startDate(context),
+                                  child: Text('Start Date'),
+                                ),
+                              ),
+                              SizedBox(width: 16),
+                              startDate == null
+                                  ? Expanded(
+                                      child: Container(
+                                        height: 1,
+                                        // width: double.infinity,
+                                        color: kMain2,
+                                      ),
+                                    )
+                                  : heaingText(
+                                      Jiffy(startDate).format("do MMM yyyy"),
+                                      color: kLabel,
+                                    ),
+                            ],
+                          ),
+                          sboxH16,
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: endDate != null
+                                ? CrossAxisAlignment.center
+                                : CrossAxisAlignment.end,
+                            children: [
+                              SizedBox(
+                                width: 100,
+                                child: ElevatedButton(
+                                  onPressed: () => _endDate(context),
+                                  child: Text('Deadline'),
+                                ),
+                              ),
+                              SizedBox(width: 16),
+                              endDate == null
+                                  ? Expanded(
+                                      child: Container(
+                                        height: 1,
+                                        // width: double.infinity,
+                                        color: kMain2,
+                                      ),
+                                    )
+                                  : heaingText(
+                                      Jiffy(endDate).format("do MMM yyyy"),
+                                      color: kLabel,
+                                    ),
+                            ],
+                          ),
+                        ],
+                      )),
+            // Spacer(),
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton(
@@ -333,34 +402,41 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                     child: heaingText('Next')),
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: List.generate(
-                  taskType.length,
-                  (index) => InkWell(
-                        onTap: () {
-                          select = index;
-                          setState(() {});
-                        },
-                        child: Padding(
-                          padding: all16,
-                          child: Container(
-                            color: kMain2,
-                            padding: all16,
-                            child: heaingText('${taskType[index]}',
-                                color: index == select
-                                    ? Colors.red
-                                    : Colors.green),
-                          ),
-                        ),
-                      )),
-            ),
-            taskTypeScreen[select],
           ],
         ),
       ),
     );
   }
+
+  int selected = 0;
+  bool week = true;
+  customCheckbox({required String day, required bool val}) {
+    return Row(
+      children: [
+        Expanded(
+          child: CheckboxListTile(
+            title: Text(day),
+            value: val,
+            onChanged: (value) {
+              print(value);
+              setState(() {
+                abc = value!;
+                print(abc);
+              });
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  bool? abc;
+  bool saturday = false;
+  bool sunday = false;
+  bool moneday = false;
+  bool tuesday = false;
+  bool wednessday = false;
+  bool thursday = false;
 
   int select = 0;
 }
