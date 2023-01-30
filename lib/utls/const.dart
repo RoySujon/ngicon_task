@@ -38,7 +38,7 @@ const right16 = EdgeInsets.only(right: 16);
 
 //Colors
 const kMain2 = Color(0xfff292B3E);
-const kMain = Color(0xff191A22);
+const kMain = Color(0xFF191A22);
 const kLabel = Color(0xffF8F8F8);
 const ksystemGrey = Color(0xffE5E5EA);
 const kSpaceGray = Color(0xff8E8E93);

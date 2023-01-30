@@ -19,7 +19,7 @@ class AddTaskScreen extends StatefulWidget {
 class _AddTaskScreenState extends State<AddTaskScreen> {
   final taskNameController = TextEditingController();
   final detailsController = TextEditingController();
-  DateTime? startDate = DateTime.now();
+  DateTime? startDate;
   Future<void> _startDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
 
@@ -38,7 +38,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
     // }
   }
 
-  DateTime? endDate = DateTime.now();
+  DateTime? endDate;
   Future<void> _endDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
 
@@ -86,8 +86,6 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
-    // startCount(startDate!.toUtc().difference(endDate!.toUtc()).toString());
     super.initState();
   }
 
@@ -103,20 +101,12 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> listOfwid = [
-      customCheckbox(day: 'Saturday', val: saturday),
-      customCheckbox(day: 'Sunday', val: sunday),
-      customCheckbox(day: 'Monday', val: moneday),
-      customCheckbox(day: 'Tuesday', val: tuesday),
-      customCheckbox(day: 'Wednessday', val: wednessday),
-      customCheckbox(day: 'Thursday', val: thursday),
-    ];
     // print(dropdownValue);
     return Scaffold(
       appBar: AppBar(title: Text('Add Task')),
       body: Padding(
         padding: const EdgeInsets.all(16),
-        child: Column(
+        child: ListView(
           children: [
             Row(
               children: [
@@ -140,6 +130,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                     icon: const Icon(Icons.arrow_drop_down),
                     elevation: 16,
                     dropdownColor: kMain2,
+                    // : kMain2,
                     isExpanded: true,
                     // iconEnabledColor: kMain,
                     focusColor: kMain,
@@ -201,12 +192,13 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                     value: stepNoValue,
                     icon: const Icon(Icons.arrow_drop_down),
                     elevation: 16,
-                    dropdownColor: kMain2,
+                    dropdownColor: Colors.deepPurpleAccent,
                     isExpanded: true,
                     // iconEnabledColor: kMain,
-                    focusColor: kMain,
+                    // focusColor: kMain,
                     style: TextStyle(color: kLabel),
-                    // underline: Container(height: 1, color: kMainColor),
+                    underline:
+                        Container(height: 1, color: Colors.deepPurpleAccent),
                     onChanged: (String? value) {
                       // This is called when the user selects an item.
                       setState(() {
@@ -239,7 +231,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           backgroundColor:
-                              selected == 0 ? Colors.deepPurple : kMain2),
+                              selected == 0 ? Colors.deepPurpleAccent : kMain2),
                       onPressed: () {
                         selected = 0;
                         setState(() {});
@@ -251,7 +243,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           backgroundColor:
-                              selected == 1 ? Colors.deepPurple : kMain2),
+                              selected == 1 ? Colors.deepPurpleAccent : kMain2),
                       onPressed: () {
                         selected = 1;
                         setState(() {});
@@ -263,7 +255,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           backgroundColor:
-                              selected == 2 ? Colors.deepPurple : kMain2),
+                              selected == 2 ? Colors.deepPurpleAccent : kMain2),
                       onPressed: () {
                         selected = 2;
                         setState(() {});
@@ -273,116 +265,118 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               ],
             ),
             selected == 0
-                ? Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        sboxH16,
-                        ListTile(
-                          trailing: Text('Start Time'),
-                          tileColor: kMain2,
-                          onTap: () {
-                            startTime();
-                          },
-                          contentPadding: all16,
-                          title: Text(_startTime == null
-                              ? TimeOfDay.now().format(context)
-                              : _startTime!.format(context)),
-                          leading: Icon(
-                            Icons.watch_later_outlined,
-                            color: kLabel,
-                          ),
+                ? Column(
+                    // mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      sboxH16,
+                      ListTile(
+                        trailing: Text('Start Time'),
+                        // tileColor: kMain2,
+                        onTap: () {
+                          startTime();
+                        },
+                        contentPadding: all16,
+                        title: Text(_startTime == null
+                            ? TimeOfDay.now().format(context)
+                            : _startTime!.format(context)),
+                        leading: Icon(
+                          Icons.watch_later_outlined,
+                          color: kLabel,
                         ),
-                        sboxH16,
-                        ListTile(
-                          contentPadding: all16,
-                          trailing: Text('End Time'),
-                          tileColor: kMain2,
-                          onTap: () {
-                            endTime();
-                          },
-                          title: Text(_endtTime == null
-                              ? TimeOfDay.now().format(context)
-                              : _endtTime!.format(context)),
-                          leading: Icon(
-                            Icons.watch_later_outlined,
-                            color: kLabel,
-                          ),
+                      ),
+                      sboxH16,
+                      ListTile(
+                        contentPadding: all16,
+                        trailing: Text('End Time'),
+                        // tileColor: kMain2,
+                        onTap: () {
+                          endTime();
+                        },
+                        title: Text(_endtTime == null
+                            ? TimeOfDay.now().format(context)
+                            : _endtTime!.format(context)),
+                        leading: Icon(
+                          Icons.watch_later_outlined,
+                          color: kLabel,
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   )
                 : selected == 1
-                    ? Expanded(
-                        child: ListView(
-                          children: listOfwid,
-                        ),
-                      )
-                    : Expanded(
-                        child: Column(
-                        // crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
+                    ? Column(
                         children: [
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: startDate != null
-                                ? CrossAxisAlignment.center
-                                : CrossAxisAlignment.end,
-                            children: [
-                              SizedBox(
-                                width: 100,
-                                child: ElevatedButton(
-                                  onPressed: () => _startDate(context),
-                                  child: Text('Start Date'),
-                                ),
-                              ),
-                              SizedBox(width: 16),
-                              startDate == null
-                                  ? Expanded(
-                                      child: Container(
-                                        height: 1,
-                                        // width: double.infinity,
-                                        color: kMain2,
-                                      ),
-                                    )
-                                  : heaingText(
-                                      Jiffy(startDate).format("do MMM yyyy"),
-                                      color: kLabel,
-                                    ),
-                            ],
+                          sboxH16,
+                          CheckboxListTile(
+                            // tileColor: kMain,
+                            title: Text('Saturday'),
+                            value: saturday,
+                            onChanged: (value) {
+                              print(value);
+                              setState(() {
+                                saturday = value!;
+                                print(saturday);
+                              });
+                            },
                           ),
                           sboxH16,
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: endDate != null
-                                ? CrossAxisAlignment.center
-                                : CrossAxisAlignment.end,
-                            children: [
-                              SizedBox(
-                                width: 100,
-                                child: ElevatedButton(
-                                  onPressed: () => _endDate(context),
-                                  child: Text('Deadline'),
-                                ),
-                              ),
-                              SizedBox(width: 16),
-                              endDate == null
-                                  ? Expanded(
-                                      child: Container(
-                                        height: 1,
-                                        // width: double.infinity,
-                                        color: kMain2,
-                                      ),
-                                    )
-                                  : heaingText(
-                                      Jiffy(endDate).format("do MMM yyyy"),
-                                      color: kLabel,
-                                    ),
-                            ],
+                          customCheckbox(day: 'Sunday', val: sunday),
+                          sboxH16,
+                          customCheckbox(day: 'Monday', val: moneday),
+                          sboxH16,
+                          customCheckbox(day: 'Tuesday', val: tuesday),
+                          sboxH16,
+                          customCheckbox(day: 'Wednessday', val: wednessday),
+                          sboxH16,
+                          customCheckbox(day: 'Thursday', val: thursday),
+                          // sboxH16,
+                        ],
+                      )
+                    : Column(
+                        // crossAxisAlignment: CrossAxisAlignment.center,
+                        // mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          sboxH16,
+                          ListTile(
+                            contentPadding: all16,
+                            trailing: Text('Starting Day'),
+                            // tileColor: kMain2,
+                            onTap: () {
+                              _startDate(context);
+                            },
+                            title: startDate == null
+                                ? SizedBox()
+                                : heaingText(
+                                    Jiffy(startDate).format("do MMM yyyy"),
+                                    color: kLabel,
+                                  ),
+                            leading: Icon(
+                              Icons.calendar_month_outlined,
+                              color: kLabel,
+                            ),
+                          ),
+                          sboxH16,
+                          ListTile(
+                            contentPadding: all16,
+                            trailing: Text('Ending Day'),
+                            // tileColor: kMain2,
+                            onTap: () {
+                              _endDate(context);
+                            },
+                            title: endDate == null
+                                ? SizedBox()
+                                : heaingText(
+                                    Jiffy(endDate).format("do MMM yyyy"),
+                                    color: kLabel,
+                                  ),
+                            leading: Icon(
+                              Icons.calendar_month_outlined,
+                              color: kLabel,
+                            ),
                           ),
                         ],
-                      )),
+                      ),
             // Spacer(),
+            sboxH16,
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -405,32 +399,28 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
           ],
         ),
       ),
+      // backgroundColor: kMain2,
     );
   }
 
   int selected = 0;
   bool week = true;
   customCheckbox({required String day, required bool val}) {
-    return Row(
-      children: [
-        Expanded(
-          child: CheckboxListTile(
-            title: Text(day),
-            value: val,
-            onChanged: (value) {
-              print(value);
-              setState(() {
-                abc = value!;
-                print(abc);
-              });
-            },
-          ),
-        ),
-      ],
+    return CheckboxListTile(
+      // tileColor: kMain,
+      title: Text(day),
+      value: val,
+      onChanged: (value) {
+        print(value);
+        setState(() {
+          val = value!;
+          print(val);
+        });
+      },
     );
   }
 
-  bool? abc;
+  // bool? abc;
   bool saturday = false;
   bool sunday = false;
   bool moneday = false;
@@ -440,39 +430,6 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
 
   int select = 0;
 }
-
-List<String> taskType = [
-  'OneTime',
-  'Daily',
-  'Weekly',
-  'Monthly',
-];
-List<Container> taskTypeScreen = [
-  Container(
-    height: 200,
-    child: ListView(
-      children: List.generate(50, (index) => Text('OneTime')),
-    ),
-  ),
-  Container(
-    height: 200,
-    child: ListView(
-      children: List.generate(50, (index) => Text('Daily')),
-    ),
-  ),
-  Container(
-    height: 200,
-    child: ListView(
-      children: List.generate(50, (index) => Text('Weekly')),
-    ),
-  ),
-  Container(
-    height: 200,
-    child: ListView(
-      children: List.generate(50, (index) => Text('Monthly')),
-    ),
-  ),
-];
 
 class CustomDropDownMenue extends StatefulWidget {
   late String value;
@@ -511,12 +468,12 @@ class _CustomDropDownMenueState extends State<CustomDropDownMenue> {
             value: widget.value,
             icon: const Icon(Icons.arrow_drop_down),
             elevation: 16,
-            dropdownColor: kMain2,
+            dropdownColor: Colors.deepPurpleAccent,
             isExpanded: true,
             // iconEnabledColor: kMain,
-            focusColor: kMain,
+            // focusColor: kMain,
             style: TextStyle(color: kLabel),
-            // underline: Container(height: 1, color: kMainColor),
+            underline: Container(height: 1, color: Colors.deepPurpleAccent),
             onChanged: (String? value) {
               // This is called when the user selects an item.
               setState(() {

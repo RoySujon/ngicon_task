@@ -15,31 +15,42 @@ class AddProjectScreen extends StatefulWidget {
 }
 
 class _AddProjectScreenState extends State<AddProjectScreen> {
-  TimeOfDay? _startTime;
-  TimeOfDay? _endtTime;
+  DateTime? startDate;
+  Future<void> _startDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
 
-  void startTime() async {
-    final TimeOfDay? newTime = await showTimePicker(
-      context: context,
-      initialTime: TimeOfDay(hour: 7, minute: 15),
-    );
-    if (newTime != null) {
-      setState(() {
-        _startTime = newTime;
-      });
-    }
+        // keyboardType: TextInputType.datetime,
+        // fieldHintText: 'dkdkdkk',
+        initialDatePickerMode: DatePickerMode.day,
+        context: context,
+        initialDate: DateTime(2022, 11, 11),
+        firstDate: DateTime(1900, 1, 1),
+        lastDate: DateTime.now());
+    // if (picked != null && picked != selectedDate) {
+    setState(() {
+      startDate = picked;
+      // datePic = picked;
+    });
+    // }
   }
 
-  void endTime() async {
-    final TimeOfDay? newTime = await showTimePicker(
-      context: context,
-      initialTime: TimeOfDay(hour: 7, minute: 15),
-    );
-    if (newTime != null) {
-      setState(() {
-        _endtTime = newTime;
-      });
-    }
+  DateTime? endDate;
+  Future<void> _endDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+
+        // keyboardType: TextInputType.datetime,
+        // fieldHintText: 'dkdkdkk',
+        initialDatePickerMode: DatePickerMode.day,
+        context: context,
+        initialDate: DateTime(2022, 11, 11),
+        firstDate: DateTime(1900, 1, 1),
+        lastDate: DateTime.now());
+    // if (picked != null && picked != selectedDate) {
+    setState(() {
+      endDate = picked;
+      // datePic = picked;
+    });
+    // }
   }
 
   final projectNameController = TextEditingController();
@@ -70,37 +81,45 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
             ),
             sboxH8,
             // sboxH16,
-            Row(
-              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            Column(
+              // crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Expanded(
-                  child: Row(
-                    children: [
-                      heaingText('Start:', fontSize: 18),
-                      IconButton(
-                          onPressed: () {
-                            startTime();
-                          },
-                          icon: Icon(Icons.watch_later_outlined)),
-                      Text(_startTime == null
-                          ? TimeOfDay.now().format(context)
-                          : _startTime!.format(context)),
-                    ],
+                ListTile(
+                  contentPadding: all16,
+                  trailing: Text('Starting Day'),
+                  // tileColor: kMain2,
+                  onTap: () {
+                    _startDate(context);
+                  },
+                  title: startDate == null
+                      ? SizedBox()
+                      : heaingText(
+                          Jiffy(startDate).format("do MMM yyyy"),
+                          color: kLabel,
+                        ),
+                  leading: Icon(
+                    Icons.calendar_month_outlined,
+                    color: kLabel,
                   ),
                 ),
-                Expanded(
-                  child: Row(
-                    children: [
-                      heaingText('End:', fontSize: 18),
-                      IconButton(
-                          onPressed: () {
-                            endTime();
-                          },
-                          icon: Icon(Icons.watch_later_outlined)),
-                      Text(_endtTime == null
-                          ? TimeOfDay.now().format(context)
-                          : _endtTime!.format(context)),
-                    ],
+                sboxH16,
+                ListTile(
+                  contentPadding: all16,
+                  trailing: Text('Ending Day'),
+                  // tileColor: kMain2,
+                  onTap: () {
+                    _endDate(context);
+                  },
+                  title: endDate == null
+                      ? SizedBox()
+                      : heaingText(
+                          Jiffy(endDate).format("do MMM yyyy"),
+                          color: kLabel,
+                        ),
+                  leading: Icon(
+                    Icons.calendar_month_outlined,
+                    color: kLabel,
                   ),
                 ),
               ],
@@ -126,12 +145,13 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
                     value: dropdownValue,
                     icon: const Icon(Icons.arrow_drop_down),
                     elevation: 16,
-                    dropdownColor: kMain2,
+                    dropdownColor: Colors.deepPurpleAccent,
                     isExpanded: true,
-                    // iconEnabledColor: kMain,
-                    focusColor: kMain,
+                    iconEnabledColor: Colors.deepPurpleAccent,
+                    // focusColor: kMain,
                     style: TextStyle(color: kLabel),
-                    // underline: Container(height: 1, color: kMainColor),
+                    underline:
+                        Container(height: 1, color: Colors.deepPurpleAccent),
                     onChanged: (String? value) {
                       // This is called when the user selects an item.
                       setState(() {

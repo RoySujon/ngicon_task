@@ -25,16 +25,17 @@ class _LoginScreenState extends State<LoginScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: horizontal16,
             child: TextField(
               keyboardType: TextInputType.text,
               decoration: InputDecoration(hintText: 'Enter employee Id'),
               controller: _employiIdController,
             ),
           ),
+          sboxH16,
           // sboxH16,
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: horizontal16,
             child: TextField(
               obscureText: isVisible ? true : false,
               decoration: InputDecoration(
@@ -53,21 +54,26 @@ class _LoginScreenState extends State<LoginScreen> {
                           },
                         );
                       },
-                      child: Icon(isVisible
-                          ? Icons.visibility
-                          : Icons.visibility_off))),
+                      child: Icon(
+                        isVisible ? Icons.visibility : Icons.visibility_off,
+                        color: kLabel,
+                      ))),
               controller: _passController,
               keyboardType: TextInputType.text,
             ),
           ),
-
-          ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (context) => AddProjectScreen(),
-              ));
-            },
-            child: Text('Login'),
+          sboxH16,
+          Container(
+            padding: horizontal16,
+            width: double.maxFinite,
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  builder: (context) => AddProjectScreen(),
+                ));
+              },
+              child: Text('Login'),
+            ),
           )
         ],
       ),

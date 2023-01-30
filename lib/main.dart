@@ -25,33 +25,50 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        iconTheme: IconThemeData(color: kLabel),
-        hintColor: kLabel,
-        elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ElevatedButton.styleFrom(backgroundColor: kMain2)),
-        appBarTheme: AppBarTheme(backgroundColor: kMain),
-        scaffoldBackgroundColor: kMain,
-        textTheme: TextTheme(
-            bodyText2: TextStyle(color: kLabel),
-            bodyText1: TextStyle(color: kLabel),
-            subtitle1: TextStyle(color: kLabel)
-            // titleLarge: TextStyle(color: Colors.white),
-            // subtitle1: TextStyle(color: kLabel),
-            // subtitle2: TextStyle(color: kLabel),
-            ),
-        inputDecorationTheme: InputDecorationTheme(
-          iconColor: kLabel,
-          // constraints: BoxConstraints(minHeight: 50),
-          enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: ksystemGrey),
-              borderRadius: BorderRadius.circular(10)),
-          focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: kSpaceGray),
-              borderRadius: BorderRadius.circular(10)),
-        ),
-        checkboxTheme: CheckboxThemeData(
-            fillColor: MaterialStateProperty.all(ksystemGrey)),
-      ),
+          buttonTheme: ButtonThemeData(focusColor: kMain),
+          iconTheme: IconThemeData(color: kLabel),
+          hintColor: kLabel,
+          elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ElevatedButton.styleFrom(
+            disabledBackgroundColor: Colors.deepPurpleAccent,
+            disabledForegroundColor: Colors.deepPurpleAccent,
+            side: BorderSide(color: Colors.deepPurpleAccent),
+            // onPrimary: Colors.deepPurpleAccent,
+
+            backgroundColor: kMain,
+            // disabledBackgroundColor: Colors.deepPurpleAccent,
+          )),
+          appBarTheme: AppBarTheme(backgroundColor: Colors.deepPurpleAccent),
+          scaffoldBackgroundColor: kMain2,
+          textTheme: TextTheme(
+              bodyText2: TextStyle(color: kLabel),
+              bodyText1: TextStyle(color: kLabel),
+              subtitle1: TextStyle(color: kLabel)
+              // titleLarge: TextStyle(color: Colors.white),
+              // subtitle1: TextStyle(color: kLabel),
+              // subtitle2: TextStyle(color: kLabel),
+              ),
+          inputDecorationTheme: InputDecorationTheme(
+            iconColor: kLabel,
+            filled: true,
+            fillColor: Colors.deepPurpleAccent,
+            // constraints: BoxConstraints(minHeight: 50),
+            enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: ksystemGrey),
+                borderRadius: BorderRadius.circular(10)),
+            focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: kSpaceGray),
+                borderRadius: BorderRadius.circular(10)),
+          ),
+          checkboxTheme: CheckboxThemeData(
+            fillColor: MaterialStateProperty.all(kLabel),
+            checkColor: MaterialStateProperty.all(kMain),
+          ),
+          listTileTheme: ListTileThemeData(
+              tileColor: Colors.deepPurpleAccent,
+              // style: ListTileStyle.list,
+              iconColor: kLabel,
+              shape: Border.all(color: kMain, width: 1))),
       home: LoginScreen(),
     );
   }
