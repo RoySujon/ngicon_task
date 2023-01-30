@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
+          // primaryColor: Colors.amber,
           buttonTheme: ButtonThemeData(focusColor: kMain),
           iconTheme: IconThemeData(color: kLabel),
           hintColor: kLabel,
@@ -52,6 +53,7 @@ class MyApp extends StatelessWidget {
             iconColor: kLabel,
             filled: true,
             fillColor: Colors.deepPurpleAccent,
+            counterStyle: TextStyle(color: kLabel),
             // constraints: BoxConstraints(minHeight: 50),
             enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: ksystemGrey),

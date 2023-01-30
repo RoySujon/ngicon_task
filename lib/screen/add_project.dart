@@ -176,7 +176,7 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
               children: [
                 ElevatedButton(
                     onPressed: () {
-                      // Navigator.pop(context);
+                      Navigator.pop(context);
                     },
                     child: heaingText('Back')),
                 ElevatedButton(

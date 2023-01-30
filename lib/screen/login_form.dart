@@ -68,7 +68,7 @@ class _LoginScreenState extends State<LoginScreen> {
             width: double.maxFinite,
             child: ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => AddProjectScreen(),
                 ));
               },

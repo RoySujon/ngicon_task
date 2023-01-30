@@ -34,16 +34,17 @@ class CustomTextField extends StatelessWidget {
         sboxW8,
         Expanded(
           child: TextField(
+            cursorColor: Colors.amber,
             controller: controller,
             maxLines: maxLine,
             minLines: maxLine,
             maxLength: maxLength,
             decoration: InputDecoration(
-              // alignLabelWithHint: true,
-              hintText: 'Enter ${hints ?? 'hints..'}',
-              hintStyle: TextStyle(color: kLabel, fontSize: 14),
-              filled: true,
-            ),
+                // alignLabelWithHint: true,
+                hintText: 'Enter ${hints ?? 'hints..'}',
+                hintStyle: TextStyle(color: kLabel, fontSize: 14),
+                filled: true,
+                fillColor: Colors.deepPurpleAccent),
           ),
         ),
       ],
