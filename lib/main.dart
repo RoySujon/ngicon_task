@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:ngicon_task/screen/add_project.dart';
 import 'package:ngicon_task/screen/add_task.dart';
 import 'package:ngicon_task/screen/counter_screen.dart';
+import 'package:ngicon_task/screen/list_page.dart';
 import 'package:ngicon_task/screen/login_form.dart';
 import 'package:ngicon_task/screen/task_allocations.dart';
 import 'package:ngicon_task/screen/timer.dart';
@@ -71,7 +72,7 @@ class MyApp extends StatelessWidget {
               // style: ListTileStyle.list,
               iconColor: kLabel,
               shape: Border.all(color: kMain, width: 1))),
-      home: LoginScreen(),
+      home: PageList(),
     );
   }
 }
