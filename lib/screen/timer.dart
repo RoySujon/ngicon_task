@@ -52,7 +52,7 @@ class _CountdownTimerDemoState extends State<CountdownTimerDemo> {
   @override
   Widget build(BuildContext context) {
     String strDigits(int n) => n.toString().padLeft(2, '0');
-    final days = strDigits(myDuration.inDays);
+    // final days = strDigits(myDuration.inDays);
     // Step 7
     final hours = strDigits(myDuration.inHours.remainder(24));
     final minutes = strDigits(myDuration.inMinutes.remainder(60));

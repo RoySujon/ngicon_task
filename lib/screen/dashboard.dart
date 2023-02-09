@@ -3,7 +3,7 @@ import 'package:ngicon_task/model/model_class.dart';
 import 'package:ngicon_task/screen/details_page.dart';
 import 'package:ngicon_task/utls/const.dart';
 
-import '../utls/const.dart';
+// import '../utls/const.dart';
 
 class DashBoardScreen extends StatefulWidget {
   const DashBoardScreen({super.key});
